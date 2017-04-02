@@ -1,3 +1,7 @@
+{-|
+  Haskell Fundamentals + Learn You a Haskell examples
+-}
+
 main = do
   -- simple if statement
   if False
@@ -105,4 +109,56 @@ map (\ x -> 2 * x) [1,2,3] -- [2,4,6]
 map (\x -> 2 * x + 1) [1,2,3] -- [3,5,7]
 
 
--- types
+-- type synonym (allow us to create new names for existing types)
+type Point = (Double, Double)
+midpoint :: Point -> Point -> Point
+midpoint (x1, y1) (x2, y2) = ((x1 + x2)/2, (y1 + y2)/2)
+
+-- newType (defines a synonym for an existing type that is not interchangage)
+newtype CustomerId = MakeCustomerId Int
+customer :: CustomerId
+customer = CustomerId 6
+
+-- records (do not use these, prefer algebraic data types)
+data Customer = MakeCustomer
+  { customerId :: CustomerId
+  , name :: String
+  , birthYear :: Int
+  }
+
+  joeC :: Customer
+  joeC = MakeCustomer -- invoking the constructor
+    {
+      cusomterId  = MakeCustomerId 6
+    , name        = "Joe Cool"
+    , birthYear   = 1967
+   }
+
+   let jlo = joeC { name = "Jennifer Lopez", birthYear = 1975 } -- this returns a copy
+
+   name jlo -- => "Jennifer Lopez"
+
+-- algebraic data types
+data Customer = MakeCustomer CustomerId String Int
+alice :: Customer
+alice = Customer (CustomerId 13) "Alice" 42
+
+getCustomerId :: Customer -> CustomerId
+getCustomerId = (Customer cust_id, _, _) = cust_id -- same as => getCustomerId (Customer cust_id name birthYear) = cust_id
+
+data RGB = RGB Double Double Double
+x :: RGB
+
+-- algebraic data type constructors
+data DialogResponse = Yes | No | Help | Quit
+
+data MaybeInt = NoInt | JustInt Int
+
+-- parameterized types
+data Mabye a = Just a | Nothing
+x :: Mabye Int
+x = Nothing
+
+fromMaybe :: a -> Maybe a -> a
+fromMabye defaultVal Nothing = defaultVal
+fromMaybe _ (Just x) = x
