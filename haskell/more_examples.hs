@@ -4,6 +4,7 @@
 import Data.List
 import System.IO
 
+
 -- types
 const5 :: Int
 const5 = 5

@@ -104,7 +104,7 @@ head' :: [a] -> a
 head' [] = error "Call on empty list not allowed"
 
 -- lambda expressions
-map (\ x -> 2 * x) [1,2,3] -- [2,4,6]
+map (\x -> 2 * x) [1,2,3] -- [2,4,6]
 
 map (\x -> 2 * x + 1) [1,2,3] -- [3,5,7]
 
